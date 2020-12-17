@@ -1,6 +1,6 @@
 import './App.css';
 import { getMovies } from './services/fakeMovieService';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import MoviesList from './components/MoviesList';
 import Movie from './components/Movie';
 import Pagination from '@material-ui/lab/Pagination';
@@ -8,19 +8,12 @@ import { paginate } from './utils/paginate';
 
 function App() {
   const moviesMock = getMovies();
-  const [movies, setMovies] = useState([]);
-  const [noOfMovies, setLength] = useState(0);
-  const [paginationCount, setPaginationCount] = useState(0);
-  const [moviesToShow, setMoviesToShow] = useState([]);
+  const [movies, setMovies] = useState(moviesMock);
+  const [noOfMovies, setLength] = useState(moviesMock.length);
+  const [paginationCount, setPaginationCount] = useState(Math.ceil(moviesMock.length / 4));
   const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    setLength(moviesMock.length);
-    setMovies(moviesMock);
-    setPaginationCount(Math.ceil(moviesMock.length / 4));
-    const filteredMovies = paginate(moviesMock, currentPage, 4);
-    setMoviesToShow(filteredMovies);
-  }, []);
+  const filteredMovies = paginate(moviesMock, currentPage, 4);
+  const [moviesToShow, setMoviesToShow] = useState(filteredMovies);
 
   const handleDelete = movie => {
     if (movies.indexOf(movie) > -1) {
