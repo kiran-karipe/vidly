@@ -48,7 +48,7 @@ const MoviesList = (props) => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {props.movies.map((movie) => (
+                {props.moviesToShow.map((movie) => (
                     <TableRow key={movie._id} id={movie._id}>
                         <TableCell component="th" scope="row">
                             {movie.title}
