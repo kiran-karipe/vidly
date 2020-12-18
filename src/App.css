@@ -1,7 +1,22 @@
 .App {
     position: relative;
+    display: flex;
 }
 .pagination {
-    width: 50%;
+    width: 100% !important;
     margin: 3% auto;
+}
+.paper {
+    margin: 4% 0 0 5%;
+    width: 10%;
+    height: 10%;
+}
+
+.allGenres {
+    border-bottom: inset !important;
+}
+
+.moviesContainer {
+    width: 60%;
+    margin-left: 5%;
 }

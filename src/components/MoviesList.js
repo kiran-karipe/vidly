@@ -16,7 +16,7 @@ const useStyles = makeStyles({
         
     },
     container: {
-        width: "50%",
+        width: "100%",
         border: "1px solid black",
         margin: "auto",
         marginTop: "15px"
