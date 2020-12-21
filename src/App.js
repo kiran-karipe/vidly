@@ -21,6 +21,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const filteredMovies = paginate(moviesMock, currentPage, 4);
   const [moviesToShow, setMoviesToShow] = useState(filteredMovies);
+  const [selectedMenuItemIndex, setSelectedMenuItemIndex] = useState('');
 
   const handleDelete = movie => {
     if (movies.indexOf(movie) > -1) {
@@ -69,20 +70,25 @@ function App() {
     });
     setMoviesToShow(genreMovies);
     setPaginationCount(Math.ceil(genreMovies.length / 4));
+    setSelectedMenuItemIndex(genre._id);
+    setLength(genreMovies.length);
   }
 
   const handleAllGenres = () => {
     handlePagination(null, 1);
     setPaginationCount(Math.ceil(movies.length / 4));
+    setSelectedMenuItemIndex('');
+    setLength(movies.length);
   }
 
   return (
     <div className="App">
       <Paper className="paper">
         <MenuList>
-          <MenuItem className="allGenres" onClick={handleAllGenres}>All Genres</MenuItem>
+          <MenuItem className="allGenres" onClick={handleAllGenres} selected={!selectedMenuItemIndex}>All Genres</MenuItem>
           {movieGenres.map((genre) => {
-            return <MenuItem key={genre._id} onClick={() => handleGenres(genre)}>{genre.name}</MenuItem>;
+            const selectedGenre = genre._id === selectedMenuItemIndex ? true : false;
+            return <MenuItem key={genre._id} onClick={() => handleGenres(genre)} selected={selectedGenre}>{genre.name}</MenuItem>;
           })}
         </MenuList>
       </Paper>
